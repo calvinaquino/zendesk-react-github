@@ -1,7 +1,7 @@
 {
-	"name": "zendesk_react_app_boilerplate",
-	"version": "2.0.0",
-	"description": "Boilerplate for making a Zendesk App with React.js and Redux ",
+	"name": "zendesk_github_react_app",
+	"version": "0.1.0",
+	"description": "Starting point for fetching github issues onto zendesk",
 	"scripts": {
 		"clean": "rimraf dist/tmp",
 		"build": "webpack --config webpack.prod.js -p",

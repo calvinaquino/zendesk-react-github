@@ -14,13 +14,18 @@
 }
 
 .App-header {
-  min-height: 80vh;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.input {
+  width: 80%;
+  height: 15vh;
 }
 
 footer a {
@@ -33,4 +38,17 @@ footer a {
   color: black;
   position: absolute;
   bottom: 0;
+}
+
+.item {
+  justify-content: flex-start;
+}
+
+.item-title {
+  text-align: start;
+  font-size: 13px;
+}
+
+.item-body {
+  font-size: 10px;
 }

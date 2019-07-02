@@ -1,36 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './App.scss';
 import { connect } from 'react-redux';
 
 function App(props) {
+  const [list, setList] = useState([]);
+
   const { users } = props;
   const { requester = {} } = users;
+
+  const onKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      const { value } = event.target;
+
+      fetch(`https://api.github.com/search/issues?q=${value}+user:calvinaquino`,{
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+        },
+      },)
+      .then(res => res.json())
+      .then(data => setList(data.items))
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <p className="Requester-name">Requesters name is {requester.name}.</p>
+        <input
+          type="text"
+          className="input"
+          id="addInput"
+          placeholder="Search Github issues"
+          onKeyDown={onKeyDown}
+        />
       </header>
-      <footer className="app-footer">
-      <a
-          className="app-link"
-          href="https://cloudhuset.dk"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Made with&nbsp;
-          <span role="img" aria-label="Love">
-          ❤️
-          </span>
-          &nbsp;
-          and
-          &nbsp;
-          <span role="img" aria-label="Love">
-          ☕
-          </span>
-          &nbsp;by Cloudhuset
-        </a>
-    </footer>
+      {list.map(item => (
+        <div key={item.html_url} className="item">
+          <a href={item.html_url} className="item-title">{item.title}</a>
+          <p className="item-body">{item.body}</p>
+        </div>
+      ))}
     </div>
   );
 }
@@ -46,3 +55,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(App);
+// export default App;
